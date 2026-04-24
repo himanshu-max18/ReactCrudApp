@@ -33,6 +33,15 @@ namespace ReactCrudApp.Server.Controllers
             return Ok(product);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Post(Product product)
+        {
+            product.Id = Guid.NewGuid(); 
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
+            return Ok(product);
+        }
+
         [HttpPut("{Id}")]
         public async Task<IActionResult> Put(Guid Id, Product product)
         {
